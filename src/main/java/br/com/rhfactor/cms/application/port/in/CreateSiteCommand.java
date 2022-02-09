@@ -1,4 +1,4 @@
-package br.com.rhfactor.cms.domain;
+package br.com.rhfactor.cms.application.port.in;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -7,10 +7,8 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level= AccessLevel.PRIVATE)
-public class Post extends Page {
+public class CreateSiteCommand {
 
-    Blog blog;
-
-    Category category;
+    String name;
 
 }
