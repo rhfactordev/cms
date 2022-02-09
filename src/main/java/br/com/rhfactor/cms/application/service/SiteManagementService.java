@@ -1,14 +1,16 @@
 package br.com.rhfactor.cms.application.service;
 
-import br.com.rhfactor.cms.application.port.in.CreateSiteCommand;
+import br.com.rhfactor.cms.application.port.in.commands.CreateSiteCommand;
 import br.com.rhfactor.cms.application.port.in.SiteManagementUsecase;
-import br.com.rhfactor.cms.application.port.in.UpdateSiteCommand;
+import br.com.rhfactor.cms.application.port.in.commands.UpdateSiteCommand;
 import br.com.rhfactor.cms.application.port.out.SiteRepository;
 import br.com.rhfactor.cms.domain.Site;
 import br.com.rhfactor.cms.infrastructure.error.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 
 @Slf4j
 @Service
@@ -37,19 +39,5 @@ public class SiteManagementService implements SiteManagementUsecase {
 
         return site;
     }
-
-    // TODO: Aqui, devo sempre passar uma command ou posso passar um ID
-    // TODO: Qual é o momento em que eu posso verificar informações de sessão
-    /*
-    @Override
-    public Boolean addDomain(Long id, String domain) {
-
-        Site site = siteRepository.findById( updateSiteCommand.getId() )
-                .orElseThrow(() -> new NotFoundException( String.format("site not found with id %s", updateSiteCommand.getId() )) );
-
-
-        return null;
-    }
-    */
 
 }

@@ -1,4 +1,4 @@
-package br.com.rhfactor.cms.application.port.in;
+package br.com.rhfactor.cms.application.port.in.commands;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -10,5 +10,6 @@ import lombok.experimental.FieldDefaults;
 public class CreateSiteCommand {
 
     String name;
+
 
 }

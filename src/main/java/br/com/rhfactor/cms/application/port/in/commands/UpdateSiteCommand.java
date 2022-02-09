@@ -1,4 +1,4 @@
-package br.com.rhfactor.cms.application.port.in;
+package br.com.rhfactor.cms.application.port.in.commands;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -10,10 +10,10 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level= AccessLevel.PRIVATE)
-public class CreateBlogCommand {
+public class UpdateSiteCommand {
 
-    Long siteId;
+    Long id;
 
-    String name;
+    String title;
 
 }

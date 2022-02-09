@@ -1,5 +1,7 @@
 package br.com.rhfactor.cms.application.port.in;
 
+import br.com.rhfactor.cms.application.port.in.commands.CreateSiteCommand;
+import br.com.rhfactor.cms.application.port.in.commands.UpdateSiteCommand;
 import br.com.rhfactor.cms.domain.Site;
 
 /**
@@ -11,8 +13,14 @@ import br.com.rhfactor.cms.domain.Site;
  */
 public interface SiteManagementUsecase {
 
+    /**
+     * Criar um site
+     * @param createSiteCommand
+     * @return
+     */
     Site createSite( CreateSiteCommand createSiteCommand );
 
     Site updateSite( UpdateSiteCommand updateSiteCommand );
+
 
 }
