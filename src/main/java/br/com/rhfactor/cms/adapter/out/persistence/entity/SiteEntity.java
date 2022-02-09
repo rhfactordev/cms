@@ -10,9 +10,9 @@ import javax.persistence.*;
 @Table(name = "cms_site")
 
 @Data
-@Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder(toBuilder = true)
 @FieldDefaults(level= AccessLevel.PRIVATE)
 public class SiteEntity {
 

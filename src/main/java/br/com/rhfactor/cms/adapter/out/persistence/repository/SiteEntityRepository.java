@@ -1,4 +1,4 @@
-package br.com.rhfactor.cms.adapter.out.persistence;
+package br.com.rhfactor.cms.adapter.out.persistence.repository;
 
 import br.com.rhfactor.cms.adapter.out.persistence.entity.SiteEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

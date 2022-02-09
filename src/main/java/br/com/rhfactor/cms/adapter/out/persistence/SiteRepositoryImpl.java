@@ -2,6 +2,7 @@ package br.com.rhfactor.cms.adapter.out.persistence;
 
 
 import br.com.rhfactor.cms.adapter.out.persistence.entity.SiteEntity;
+import br.com.rhfactor.cms.adapter.out.persistence.repository.SiteEntityRepository;
 import br.com.rhfactor.cms.application.port.out.SiteRepository;
 import br.com.rhfactor.cms.domain.Site;
 import lombok.RequiredArgsConstructor;
