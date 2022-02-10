@@ -1,19 +1,28 @@
 package br.com.rhfactor.cms.application.port.in.commands;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.sun.istack.NotNull;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder(toBuilder = true)
 @FieldDefaults(level= AccessLevel.PRIVATE)
 public class CreateBlogCommand {
 
+    @NotNull
     Long siteId;
 
-    String name;
+    @NotNull
+    String title;
+
+    String metaDescription;
+
+    String metaKeyword;
+
+    String ogTitle;
+
+    String ogDescription;
 
 }

@@ -23,11 +23,8 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class SiteManagementServiceTest {
 
-    @Mock
-    private SiteRepository siteRepository;
-
-    @Mock
-    private DomainRepository domainRepository;
+    @Mock private SiteRepository siteRepository;
+    @Mock private DomainRepository domainRepository;
 
     @InjectMocks
     private SiteManagementService service;

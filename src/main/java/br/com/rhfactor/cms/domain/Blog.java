@@ -18,8 +18,20 @@ public class Blog extends MetaAttributes {
 
     String title;
 
-    String slug;
+    /**
+     * prefixo da raiz do blog
+     *
+     */
+    @Builder.Default
+    String prefix = "blog";
 
-    LocalDateTime creationDate;
+    @Builder.Default
+    Boolean active = true;
+
+    @Builder.Default
+    Boolean allowComment = false;
+
+    @Builder.Default
+    LocalDateTime creationDate = LocalDateTime.now();
 
 }
