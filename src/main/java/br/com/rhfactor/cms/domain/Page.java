@@ -6,8 +6,11 @@ import lombok.experimental.FieldDefaults;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper=true)
 @FieldDefaults(level= AccessLevel.PROTECTED)
 public class Page extends MetaAttributes {
+
+    Site site;
 
     Long id;
 

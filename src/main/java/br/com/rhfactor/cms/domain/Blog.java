@@ -3,6 +3,8 @@ package br.com.rhfactor.cms.domain;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDateTime;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -17,5 +19,7 @@ public class Blog extends MetaAttributes {
     String title;
 
     String slug;
+
+    LocalDateTime creationDate;
 
 }
