@@ -4,6 +4,7 @@ import br.com.rhfactor.cms.application.port.in.commands.CreateSiteCommand;
 import br.com.rhfactor.cms.application.port.out.DomainRepository;
 import br.com.rhfactor.cms.application.port.out.SiteRepository;
 import br.com.rhfactor.cms.domain.Site;
+import br.com.rhfactor.cms.infrastructure.error.exception.InvalidArgumentException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -12,6 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -66,5 +68,29 @@ class SiteManagementServiceTest {
         verify(domainRepository, times(1)).doesTheDomainExists(any(String.class));
 
     }
+
+    /**
+     * Testar a criação um site com um domínio existente, deve retornar erro
+     */
+    @Test
+    void test_create_site_with_existing_domain() {
+
+        when( domainRepository.doesTheDomainExists( any(String.class) )).thenReturn(true);
+
+        CreateSiteCommand create = CreateSiteCommand.builder()
+                .name("RH Factor")
+                .domain("rhfactor.com.br")
+                .build();
+
+        assertThrows(InvalidArgumentException.class, () -> {
+            service.createSite(create);
+        });
+
+        verify(siteRepository, times(0)).save(any(Site.class));
+        verify(domainRepository, times(1)).doesTheDomainExists(any(String.class));
+
+    }
+
+
 
 }
