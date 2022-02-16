@@ -2,13 +2,17 @@ package br.com.rhfactor.cms.adapter.in.rest;
 
 import br.com.rhfactor.cms.adapter.in.responses.BlogResponse;
 import br.com.rhfactor.cms.adapter.in.responses.CategoryResponse;
+import br.com.rhfactor.cms.adapter.in.responses.PostResponse;
+import br.com.rhfactor.cms.domain.Post;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -27,46 +31,57 @@ public class BlogController {
      * @return
      */
     @GetMapping
-    public BlogResponse getBlogInfo(){
+    public BlogResponse getBlogInfo() {
 
-        /*
-        BlogResponse blogResponse = new BlogResponse();
-        blogResponse.setTitle( "Blog Sara Koimbra" );
-        blogResponse.setCategories( new ArrayList<>() );
-
-        CategoryResponse category1 = new CategoryResponse();
-        category1.setName( "Astrologia" );
-        category1.setLink( "/blog/astrologia" );
-        blogResponse.getCategories().add( category1 );
-
-        CategoryResponse category2 = new CategoryResponse();
-        category2.setName( "Tarot" );
-        category2.setLink( "/blog/tarot" );
-        blogResponse.getCategories().add( category2 );
-        */
 
         return BlogResponse.builder()
                 .title("Blog Sara Koimbra")
-                .categories( new ArrayList<>() {{
+                .categories(new ArrayList<>() {{
 
-                    add( CategoryResponse.builder()
+                    add(CategoryResponse.builder()
                             .name("Astrologia")
                             .link("astroliga")
-                            .build() );
+                            .build());
 
-                    add( CategoryResponse.builder()
+                    add(CategoryResponse.builder()
                             .name("Tarot")
                             .link("tatot")
-                            .build() );
+                            .build());
 
-                    add( CategoryResponse.builder()
+                    add(CategoryResponse.builder()
                             .name("Ervas")
                             .link("ervas")
-                            .build() );
+                            .build());
 
-                }} )
+                }})
                 .build();
     }
+    @GetMapping("post")
+
+    public List<PostResponse> getPostInfo(){
+
+        List<PostResponse> postResponses = new ArrayList<>();
+
+        postResponses.add(PostResponse.builder()
+                .title("Gemeos")
+                .content("O melhor signo do mundo")
+                .link("/gemeos")
+                .date(LocalDate.now())
+                .image("url da imagem")
+                .build());
+
+        postResponses.add(PostResponse.builder()
+                .title("Cancer")
+                .content("Não vale a pena")
+                .link("/cancer")
+                .date(LocalDate.now())
+                .image("url da imagem")
+                .build());
+
+        return postResponses;
 
 
+
+    }
 }
+
