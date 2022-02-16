@@ -17,12 +17,15 @@ import java.util.ArrayList;
 public class BlogController {
 
     /**
-     * - Obter informações sobre o blog
-     * - Obter as categorias do blog
      * - Obter os posts do blog
      * - Detalhar um post do blog
      */
 
+    /**
+     * Requisição para obter as informações necessárias para a página inicial do blog
+     *
+     * @return
+     */
     @GetMapping
     public BlogResponse getBlogInfo(){
 
