@@ -60,23 +60,28 @@ public class BlogController {
 
     public List<PostResponse> getPostInfo(){
 
-        List<PostResponse> postResponses = new ArrayList<>();
+        List<PostResponse> postResponses = new ArrayList<>() {{
+                add(PostResponse.builder()
+                        .title("Gemeos")
+                        .content("O melhor signo do mundo")
+                        .link("/gemeos")
+                        .date(LocalDate.now())
+                        .image("url da imagem")
+                        .build());
 
-        postResponses.add(PostResponse.builder()
-                .title("Gemeos")
-                .content("O melhor signo do mundo")
-                .link("/gemeos")
-                .date(LocalDate.now())
-                .image("url da imagem")
-                .build());
+                add(PostResponse.builder()
+                        .title("Cancer")
+                        .content("Não vale a pena")
+                        .link("/cancer")
+                        .date(LocalDate.now())
+                        .image("url da imagem")
+                        .build());
+                
 
-        postResponses.add(PostResponse.builder()
-                .title("Cancer")
-                .content("Não vale a pena")
-                .link("/cancer")
-                .date(LocalDate.now())
-                .image("url da imagem")
-                .build());
+
+        }};
+
+
 
         return postResponses;
 
