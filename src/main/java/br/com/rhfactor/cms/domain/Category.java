@@ -18,4 +18,12 @@ public class Category extends MetaAttributes {
 
     String slug;
 
+    /**
+     * Aqui tem que montar a URL completa da aplicação utilizando o Prefixo do blog
+     * @return
+     */
+    public String getTarget(){
+        return blog.getPrefix().concat("/").concat( slug );
+    }
+
 }
