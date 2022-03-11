@@ -23,7 +23,7 @@ public class BlogEntity {
     String name;
 
     @ManyToOne(optional = false)
-    @JoinColumn(updatable = false, nullable = false, unique = true)
+    @JoinColumn(nullable = false, updatable = false, name = "site_id")
     SiteEntity site;
 
 

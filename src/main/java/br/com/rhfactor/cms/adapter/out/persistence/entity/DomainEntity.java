@@ -1,5 +1,6 @@
 package br.com.rhfactor.cms.adapter.out.persistence.entity;
 
+import br.com.rhfactor.cms.domain.Domain;
 import br.com.rhfactor.cms.domain.Site;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -7,7 +8,7 @@ import lombok.experimental.FieldDefaults;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "cms_site")
+@Table(name = "cms_site_domain")
 
 @Data
 @NoArgsConstructor
@@ -20,19 +21,22 @@ public class DomainEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    String name;
+    @ManyToOne(optional = false)
+    @JoinColumn(nullable = false, updatable = false, name = "site_id")
+    SiteEntity site;
+
+    String domain;
 
     public static DomainEntity fromDomain(Site site) {
         return DomainEntity.builder()
                 .id( site.getId() )
-                .name( site.getName() )
+                .domain( site.getName() )
                 .build();
     }
 
-    public Site toDomain() {
-        return Site.builder()
-                .id( id )
-                .name( name )
+    public Domain toDomain() {
+        // TODO: Implementar
+        return Domain.builder()
                 .build();
     }
 }

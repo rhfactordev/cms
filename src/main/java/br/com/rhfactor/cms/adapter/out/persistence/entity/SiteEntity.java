@@ -5,6 +5,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "cms_site")
@@ -21,6 +22,9 @@ public class SiteEntity {
     Long id;
 
     String name;
+
+    @OneToMany(mappedBy = "site")
+    List<DomainEntity> domains;
 
     public static SiteEntity fromDomain(Site site) {
         return SiteEntity.builder()

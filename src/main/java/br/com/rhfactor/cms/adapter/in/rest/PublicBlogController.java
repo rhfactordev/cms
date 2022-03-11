@@ -35,8 +35,7 @@ public class PublicBlogController {
         // TODO: Receber o domínio na requisição
         Blog blog = getBlog( "sarakoimbra.com.br" );
 
-        List<Category> categoryList = blogUsecase
-                .getCategoriesFromBlog( blog );
+        List<Category> categoryList = blogUsecase.getCategoriesFromBlog( blog );
 
         return PublicBlogResponse.builder()
                 .title( blog.getTitle() )

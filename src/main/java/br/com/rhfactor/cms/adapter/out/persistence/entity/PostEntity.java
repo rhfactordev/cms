@@ -1,10 +1,12 @@
 package br.com.rhfactor.cms.adapter.out.persistence.entity;
 
-import br.com.rhfactor.cms.domain.Blog;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "cms_blog_post")
@@ -20,26 +22,29 @@ public class PostEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    String name;
+    @ManyToOne(optional = false)
+    @JoinColumn(updatable = false, nullable = false, name = "blog_id")
+    BlogEntity blog;
 
     @ManyToOne(optional = false)
-    @JoinColumn(updatable = false, nullable = false, unique = true)
-    SiteEntity site;
+    @JoinColumn(updatable = false, nullable = false, name = "category_id")
+    CategoryEntity category;
+
+    @NotNull
+    @NotEmpty
+    String title;
+
+    @NotNull
+    @NotEmpty
+    @Length(min = 1)
+//    @Pattern(regexp = "[a-zA-Z0-9-_]")
+    String slug;
 
 
-    public static PostEntity fromDomain(Blog blog) {
-        return PostEntity.builder()
-                .id( blog.getId() )
-                .site( SiteEntity.fromDomain( blog.getSite() ) )
-                .name( blog.getTitle() )
-                .build();
-    }
+    String description;
 
-    public Blog toDomain() {
-        return Blog.builder()
-                .id( id )
-                .title( name )
-                .site( site.toDomain() )
-                .build();
-    }
+    @Lob
+    String content;
+
+
 }

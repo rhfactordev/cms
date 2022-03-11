@@ -2,10 +2,13 @@ package br.com.rhfactor.cms.adapter.out.persistence;
 
 
 import br.com.rhfactor.cms.adapter.out.persistence.entity.BlogEntity;
+import br.com.rhfactor.cms.adapter.out.persistence.entity.DomainEntity;
 import br.com.rhfactor.cms.adapter.out.persistence.repository.BlogEntityRepository;
+import br.com.rhfactor.cms.adapter.out.persistence.repository.DomainEntityRepository;
 import br.com.rhfactor.cms.application.port.out.BlogRepository;
 import br.com.rhfactor.cms.domain.Blog;
 import br.com.rhfactor.cms.domain.Site;
+import br.com.rhfactor.cms.infrastructure.error.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -18,6 +21,7 @@ import java.util.Optional;
 public class BlogRepositoryImpl implements BlogRepository {
 
     private final BlogEntityRepository blogEntityRepository;
+    private final DomainEntityRepository domainEntityRepository;
 
     @Override
     public Blog save(Blog blog) {
@@ -34,6 +38,13 @@ public class BlogRepositoryImpl implements BlogRepository {
 
     @Override
     public Optional<Blog> findByDomain(String domain) {
-        return Optional.empty();
+
+        DomainEntity domainEntity = domainEntityRepository.findByDomain(domain)
+                .orElseThrow(()-> new NotFoundException("Domain not found"));
+
+        return blogEntityRepository.findBySite( domainEntity.getSite() )
+                .map(BlogEntity::toDomain);
     }
+
+
 }

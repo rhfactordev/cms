@@ -8,10 +8,23 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper=false)
 @FieldDefaults(level= AccessLevel.PRIVATE)
-public class Post extends SitePage {
+public class Post extends MetaAttributes {
+
+    Long id;
 
     Blog blog;
 
     Category category;
+
+    String title;
+
+    String slug;
+
+    String description;
+
+    String content;
+
+
+
 
 }
