@@ -33,4 +33,13 @@ public class PostSpecialization {
             return criteriaBuilder.equal( root.get(PostEntity_.CATEGORY).get("slug") , slug.get() );
         };
     }
+
+    public static Specification<PostEntity> source(Optional<String> slug) {
+        if( slug.isEmpty() ){
+            return null;
+        }
+        return (root, query, criteriaBuilder) -> {
+            return criteriaBuilder.equal( root.get(PostEntity_.SLUG) , slug.get() );
+        };
+    }
 }

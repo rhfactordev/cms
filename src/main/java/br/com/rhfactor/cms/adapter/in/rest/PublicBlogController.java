@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -70,7 +72,7 @@ public class PublicBlogController {
 
     @GetMapping("post")
     public PageResponse detail(
-            @RequestParam("source") String source
+            @RequestParam(value = "source", required = true) @NotEmpty @NotNull String source
     ){
 
         Post post = blogUsecase.getPost( getBlog( "sarakoimbra.com.br" ) , source )

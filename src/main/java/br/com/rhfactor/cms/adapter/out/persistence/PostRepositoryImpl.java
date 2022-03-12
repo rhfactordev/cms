@@ -29,7 +29,17 @@ public class PostRepositoryImpl implements PostRepository {
 
     @Override
     public Optional<Post> findByBlogAndSource(Blog blog, String source) {
-        return Optional.empty();
+
+        String[] sourceArr = source.split("/");
+
+        Specification<PostEntity> spec =
+                Specification.where( PostSpecialization.blog( blog.getId() ) )
+                        .and( PostSpecialization.categorySource( Optional.of( sourceArr[0] ) ) )
+                        .and( PostSpecialization.source( Optional.of( sourceArr[1] ) ) )
+                ;
+
+        return repository.findOne(spec)
+                .map(PostEntity::toDomain);
     }
 
     @Override
