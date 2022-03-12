@@ -1,5 +1,6 @@
 package br.com.rhfactor.cms.adapter.out.persistence.entity;
 
+import br.com.rhfactor.cms.domain.Post;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.validator.constraints.Length;
@@ -8,8 +9,15 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+
+/**
+ * @see br.com.rhfactor.cms.domain.Post
+ */
 @Entity
-@Table(name = "cms_blog_post")
+@Table(name = "cms_blog_post", uniqueConstraints = {
+        @UniqueConstraint(name = "UN_post_slug", columnNames = {"category_id","slug"}),
+        @UniqueConstraint(name = "UN_post_title", columnNames = {"category_id","title"})
+})
 
 @Data
 @NoArgsConstructor
@@ -40,11 +48,20 @@ public class PostEntity {
 //    @Pattern(regexp = "[a-zA-Z0-9-_]")
     String slug;
 
-
     String description;
 
     @Lob
     String content;
 
-
+    public static <R> Post toDomain(PostEntity postEntity) {
+        return Post.builder()
+                .id(postEntity.getId())
+                .blog(postEntity.getBlog().toDomain())
+                .category( CategoryEntity.toDomain(postEntity.getCategory()) )
+                .title(postEntity.getTitle())
+                .slug(postEntity.getSlug())
+                .description(postEntity.getDescription())
+                .content(postEntity.getContent())
+                .build();
+    }
 }

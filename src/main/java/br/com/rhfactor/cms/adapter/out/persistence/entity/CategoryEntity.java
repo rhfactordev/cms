@@ -24,6 +24,10 @@ import javax.validation.constraints.Pattern;
 @FieldDefaults(level= AccessLevel.PRIVATE)
 public class CategoryEntity {
 
+    public CategoryEntity(Long id) {
+        this.id = id;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;

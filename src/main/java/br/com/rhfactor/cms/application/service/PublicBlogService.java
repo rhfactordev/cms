@@ -32,8 +32,8 @@ public class PublicBlogService implements PublicBlogUsecase {
     }
 
     @Override
-    public Page<Post> listPosts(Blog blog, Optional<String> category, Optional<String> tag, PageRequest pageRequest) {
-        return postRepository.findPosts(blog, category, tag, pageRequest);
+    public Page<Post> listPosts(Blog blog, Optional<String> category, Optional<String> tag, PageableRequest pageableRequest) {
+        return postRepository.findPosts(blog, category, tag, pageableRequest);
     }
 
     @Override

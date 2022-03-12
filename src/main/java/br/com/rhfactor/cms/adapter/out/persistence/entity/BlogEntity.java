@@ -16,6 +16,10 @@ import javax.persistence.*;
 @FieldDefaults(level= AccessLevel.PRIVATE)
 public class BlogEntity {
 
+    public BlogEntity(Long id) {
+        this.id = id;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
@@ -25,6 +29,7 @@ public class BlogEntity {
     @ManyToOne(optional = false)
     @JoinColumn(nullable = false, updatable = false, name = "site_id")
     SiteEntity site;
+
 
 
     public static BlogEntity fromDomain(Blog blog) {

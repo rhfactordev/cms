@@ -7,6 +7,7 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper=false)
+@Builder(toBuilder = true)
 @FieldDefaults(level= AccessLevel.PRIVATE)
 public class Post extends MetaAttributes {
 
@@ -23,8 +24,5 @@ public class Post extends MetaAttributes {
     String description;
 
     String content;
-
-
-
 
 }

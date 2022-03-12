@@ -33,7 +33,7 @@ public interface PublicBlogUsecase {
      * @param tag
      * @return
      */
-    Page<Post> listPosts(Blog blog, Optional<String> category, Optional<String> tag, PageRequest pageRequest);
+    Page<Post> listPosts(Blog blog, Optional<String> category, Optional<String> tag, PageableRequest pageableRequest);
 
     /**
      * Obter uma

@@ -15,9 +15,14 @@ import java.util.List;
 @FieldDefaults(level= AccessLevel.PRIVATE)
 public class Page<T> {
 
+    public Page(List<T> content, PageableRequest pageRequest, long totalElements) {
+        this.content = content;
+        this.pageRequest = pageRequest;
+        this.totalElements = totalElements;
+    }
+
+    PageableRequest pageRequest;
+    long totalElements;
     List<T> content;
 
-    public long getTotalElements() {
-        return this.content == null ? 0 : this.content.toArray().length;
-    }
 }

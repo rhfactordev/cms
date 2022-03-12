@@ -57,7 +57,7 @@ public class PublicBlogController {
         Page<Post> posts = blogUsecase.listPosts( getBlog( "sarakoimbra.com.br" )
                 , category
                 , tag
-                , PageRequest.from(pageable) );
+                , PageableRequest.from(pageable) );
 
         return new PageImpl<PageResponse>( posts.getContent()
                     .stream()

@@ -4,6 +4,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.springframework.data.domain.Pageable;
 
+
 /**
  * Esse cara será o nosso pageRequest interno
  */
@@ -12,16 +13,17 @@ import org.springframework.data.domain.Pageable;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level= AccessLevel.PRIVATE)
-public class PageRequest {
+public class PageableRequest {
 
     Integer pageSize;
     Integer pageNumber;
 
     // TODO: Implementar as ordenações
-    public static PageRequest from(Pageable pageable) {
-        return PageRequest.builder()
+    public static PageableRequest from(Pageable pageable) {
+        return PageableRequest.builder()
                 .pageSize( pageable.getPageSize() )
                 .pageNumber( pageable.getPageNumber() )
                 .build();
     }
+
 }
