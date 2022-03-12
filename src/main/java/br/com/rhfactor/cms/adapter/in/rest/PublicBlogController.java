@@ -59,12 +59,12 @@ public class PublicBlogController {
                 , tag
                 , PageableRequest.from(pageable) );
 
-        return new PageImpl<PageResponse>( posts.getContent()
-                    .stream()
-                    .map(PageResponse::fromPost)
-                    .collect(Collectors.toList())
+        return new PageImpl<>(posts.getContent()
+                .stream()
+                .map(PageResponse::toListPostPage)
+                .collect(Collectors.toList())
                 , pageable
-                , posts.getTotalElements() );
+                , posts.getTotalElements());
 
     }
 
@@ -75,7 +75,7 @@ public class PublicBlogController {
 
         Post post = blogUsecase.getPost( getBlog( "sarakoimbra.com.br" ) , source )
                 .orElseThrow( () -> new NotFoundException("Post not found") );
-        return PageResponse.fromPost( post );
+        return PageResponse.toListPostPage( post );
     }
 
     private Blog getBlog( String domain ){

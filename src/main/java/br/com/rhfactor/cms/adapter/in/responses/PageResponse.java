@@ -1,8 +1,11 @@
 package br.com.rhfactor.cms.adapter.in.responses;
 
 import br.com.rhfactor.cms.domain.Post;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 
 @Data
 @NoArgsConstructor
@@ -43,7 +46,7 @@ public class PageResponse {
     String ogImage;
 
 
-    public static <R> PageResponse fromPost(Post post) {
+    public static <R> PageResponse toListPostPage(Post post) {
         return PageResponse.builder()
                 .title( post.getTitle() )
                 .content( post.getContent() )
