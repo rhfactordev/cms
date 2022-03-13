@@ -25,4 +25,6 @@ public class Post extends MetaAttributes {
 
     String content;
 
+    String image;
+
 }

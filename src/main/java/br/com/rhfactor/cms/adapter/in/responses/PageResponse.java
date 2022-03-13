@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.awt.*;
+
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 
 @Data
@@ -23,6 +25,10 @@ public class PageResponse {
     String subtitle;
 
     String content;
+
+    LinkResponse image;
+
+    LinkResponse target;
 
     String date;
     /**
@@ -49,7 +55,27 @@ public class PageResponse {
     public static <R> PageResponse toListPostPage(Post post) {
         return PageResponse.builder()
                 .title( post.getTitle() )
+                .content( post.getDescription() )
+                .image( LinkResponse.builder()
+                        .alt( post.getTitle() )
+                        .target( post.getImage() )
+                        .build() )
+                .target(
+                        LinkResponse.builder()
+                                .target( post.getCategory().getSlug().concat("/").concat(post.getSlug()) )
+                                .build()
+                )
+                .build();
+    }
+
+    public static PageResponse toDetailPage(Post post) {
+        return PageResponse.builder()
+                .title( post.getTitle() )
                 .content( post.getContent() )
+                .image( LinkResponse.builder()
+                        .alt( post.getTitle() )
+                        .target( post.getImage() )
+                        .build() )
                 .build();
     }
 }

@@ -77,7 +77,7 @@ public class PublicBlogController {
 
         Post post = blogUsecase.getPost( getBlog( "sarakoimbra.com.br" ) , source )
                 .orElseThrow( () -> new NotFoundException("Post not found") );
-        return PageResponse.toListPostPage( post );
+        return PageResponse.toDetailPage( post );
     }
 
     private Blog getBlog( String domain ){

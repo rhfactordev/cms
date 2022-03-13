@@ -1,5 +1,6 @@
 package br.com.rhfactor.cms.adapter.out.persistence.entity;
 
+import br.com.rhfactor.cms.adapter.in.responses.LinkResponse;
 import br.com.rhfactor.cms.domain.Post;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -8,6 +9,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.Calendar;
 
 
 /**
@@ -48,10 +50,21 @@ public class PostEntity {
 //    @Pattern(regexp = "[a-zA-Z0-9-_]")
     String slug;
 
+    @Column(columnDefinition = "TEXT")
     String description;
 
     @Lob
     String content;
+
+    @Column(length = 200)
+    String image;
+
+    @Builder.Default
+    Calendar creationDate = Calendar.getInstance();
+
+    Calendar publishedDate;
+
+    Calendar lastUpdateDate;
 
     public static <R> Post toDomain(PostEntity postEntity) {
         return Post.builder()
@@ -62,6 +75,7 @@ public class PostEntity {
                 .slug(postEntity.getSlug())
                 .description(postEntity.getDescription())
                 .content(postEntity.getContent())
+                .image(postEntity.getImage())
                 .build();
     }
 }
