@@ -3,23 +3,26 @@ package br.com.rhfactor.cms.domain;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.List;
+
+/**
+ * Esse cara será o nosso pageRequest interno
+ */
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper=true)
-@FieldDefaults(level= AccessLevel.PROTECTED)
-public class Page extends MetaAttributes {
+@FieldDefaults(level= AccessLevel.PRIVATE)
+public class Page<T> {
 
-    Site site;
+    public Page(List<T> content, PageableRequest pageRequest, long totalElements) {
+        this.content = content;
+        this.pageRequest = pageRequest;
+        this.totalElements = totalElements;
+    }
 
-    Long id;
-
-    String title;
-
-    String source;
-
-    String slug;
-
-    String content;
+    PageableRequest pageRequest;
+    long totalElements;
+    List<T> content;
 
 }

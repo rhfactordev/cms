@@ -27,7 +27,7 @@ public class Menu {
     /**
      * Link para páginas internas
      */
-    Page page;
+    SitePage page;
 
 
 

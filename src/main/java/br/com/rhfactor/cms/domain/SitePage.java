@@ -6,16 +6,20 @@ import lombok.experimental.FieldDefaults;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode(callSuper=true)
 @FieldDefaults(level= AccessLevel.PROTECTED)
-public class MetaAttributes {
+public class SitePage extends MetaAttributes {
 
-    String metaDescription;
+    Site site;
 
-    String metaKeyword;
+    Long id;
 
-    String ogTitle;
+    String title;
 
-    String ogDescription;
+    String source;
+
+    String slug;
+
+    String content;
 
 }

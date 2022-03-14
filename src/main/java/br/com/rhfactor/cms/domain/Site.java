@@ -19,7 +19,7 @@ public class Site extends MetaAttributes {
     String name;
 
     @Builder.Default
-    List<Page> pages = new ArrayList<>();
+    List<SitePage> pages = new ArrayList<>();
 
     @Builder.Default
     List<Menu> menus = new ArrayList<>();

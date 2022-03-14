@@ -1,8 +1,8 @@
 package br.com.rhfactor.cms.adapter.in.rest;
 
 import br.com.rhfactor.cms.adapter.in.responses.SiteResponse;
-import br.com.rhfactor.cms.application.port.in.commands.CreateSiteCommand;
 import br.com.rhfactor.cms.application.port.in.SiteManagementUsecase;
+import br.com.rhfactor.cms.application.port.in.commands.CreateSiteCommand;
 import br.com.rhfactor.cms.domain.Site;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
