@@ -9,8 +9,9 @@ import java.util.Optional;
 
 public interface PostRepository {
 
-    Optional<Post> findByBlogAndSource(Blog blog, String source);
+    Page<Post> findPosts(Blog blog, PageableRequest pageableRequest);
 
     Page<Post> findPosts(Blog blog, Optional<String> category, Optional<String> tag, PageableRequest pageableRequest);
 
+    Optional<Post> findByBlogAndSource(Blog blog, String source);
 }
