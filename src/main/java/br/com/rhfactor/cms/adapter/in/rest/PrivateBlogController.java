@@ -61,9 +61,20 @@ public class PrivateBlogController {
                 .build();
     }
 
-//    createPost();
+    @PutMapping("post/{id}")
+    public PostListItemResponse update(@PathVariable("id") Long id, @RequestBody @Valid CreatePostCommand command){
 
-//    updatePost();
+        Post post = blogUsecase.updatePost( id, command );
+
+        return PostListItemResponse.builder()
+                .id(post.getId())
+                .categoryId( post.getCategory().getId() )
+                .categoryName( post.getCategory().getName() )
+                .title( post.getTitle() )
+                .build();
+    }
+
+
 
 
 }
