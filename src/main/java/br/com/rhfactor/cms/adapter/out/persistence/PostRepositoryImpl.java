@@ -52,6 +52,16 @@ public class PostRepositoryImpl implements PostRepository {
     }
 
     @Override
+    public Post save(Post post) {
+
+        PostEntity postEntity = PostEntity.fromDomain(post);
+        repository.save( postEntity );
+        post.setId( postEntity.getId() );
+
+        return post;
+    }
+
+    @Override
     public Page<Post> findPosts(Blog blog, PageableRequest pageableRequest) {
         return findPosts(blog, Optional.empty(), Optional.empty(), pageableRequest);
     }

@@ -78,4 +78,17 @@ public class PostEntity {
                 .image(postEntity.getImage())
                 .build();
     }
+
+    public static PostEntity fromDomain(Post post) {
+        return PostEntity.builder()
+                .id(post.getId())
+                .blog( BlogEntity.fromDomain( post.getBlog() ) )
+                .category( CategoryEntity.fromDomain( post.getCategory() ) )
+                .title(post.getTitle())
+                .slug(post.getSlug())
+                .description(post.getDescription())
+                .content(post.getContent())
+                .image(post.getImage())
+                .build();
+    }
 }

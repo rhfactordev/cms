@@ -35,7 +35,7 @@ public class BlogEntity {
     public static BlogEntity fromDomain(Blog blog) {
         return BlogEntity.builder()
                 .id( blog.getId() )
-                .site( SiteEntity.fromDomain( blog.getSite() ) )
+                .site( blog.getSite() == null ? null : SiteEntity.fromDomain( blog.getSite() ) )
                 .name( blog.getTitle() )
                 .build();
     }

@@ -9,8 +9,6 @@ import java.util.Optional;
 
 public interface PrivateBlogUsecase {
 
-
-
     /**
      * Listar todos os posts
      *
@@ -21,5 +19,7 @@ public interface PrivateBlogUsecase {
 
     Optional<Post> getPostById(Long id);
 
-//    Post createPost( CreatePostCommand postCommand );
+    Post createPost( CreatePostCommand postCommand );
+
+    Post updatePost( Long id, CreatePostCommand postCommand );
 }
