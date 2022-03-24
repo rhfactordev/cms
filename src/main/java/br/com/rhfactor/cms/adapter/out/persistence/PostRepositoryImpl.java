@@ -1,5 +1,6 @@
 package br.com.rhfactor.cms.adapter.out.persistence;
 
+import br.com.rhfactor.cms.adapter.out.persistence.entity.BlogEntity;
 import br.com.rhfactor.cms.adapter.out.persistence.entity.PostEntity;
 import br.com.rhfactor.cms.adapter.out.persistence.repository.PostEntityRepository;
 import br.com.rhfactor.cms.adapter.out.persistence.specialization.PostSpecialization;
@@ -8,6 +9,7 @@ import br.com.rhfactor.cms.domain.Blog;
 import br.com.rhfactor.cms.domain.Page;
 import br.com.rhfactor.cms.domain.PageableRequest;
 import br.com.rhfactor.cms.domain.Post;
+import br.com.rhfactor.cms.infrastructure.error.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.jpa.domain.Specification;
@@ -40,6 +42,13 @@ public class PostRepositoryImpl implements PostRepository {
 
         return repository.findOne(spec)
                 .map(PostEntity::toDomain);
+    }
+
+    @Override
+    public Optional<Post> findPostByBlogAndId(Blog blog, Long id) {
+        PostEntity post = repository.findByBlogAndId(BlogEntity.fromDomain(blog), id)
+                .orElseThrow(() -> new NotFoundException("Blog not found"));
+        return  Optional.of( PostEntity.toDomain( post ) );
     }
 
     @Override

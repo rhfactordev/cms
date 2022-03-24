@@ -29,6 +29,12 @@ public class PrivateBlogService implements PrivateBlogUsecase {
         return postRepository.findPosts(blog, pageableRequest);
     }
 
+    @Override
+    public Optional<Post> getPostById(Long id) {
+        Blog blog = getBlogFromSession();
+        return postRepository.findPostByBlogAndId(blog, id);
+    }
+
     private Blog getBlogFromSession() {
 
         // TODO: Buscar site na sessão

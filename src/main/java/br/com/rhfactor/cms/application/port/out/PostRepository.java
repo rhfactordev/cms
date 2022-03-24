@@ -14,4 +14,6 @@ public interface PostRepository {
     Page<Post> findPosts(Blog blog, Optional<String> category, Optional<String> tag, PageableRequest pageableRequest);
 
     Optional<Post> findByBlogAndSource(Blog blog, String source);
+
+    Optional<Post> findPostByBlogAndId(Blog blog, Long id);
 }
