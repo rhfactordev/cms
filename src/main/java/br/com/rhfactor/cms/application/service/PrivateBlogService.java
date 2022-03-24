@@ -72,6 +72,12 @@ public class PrivateBlogService implements PrivateBlogUsecase {
         return postRepository.save( post );
     }
 
+    @Override
+    public List<Category> listAllCategories() {
+        Blog blog = getBlogFromSession();
+        return this.categoryRepository.listAllCategoriesFromBlog(blog);
+    }
+
     private Blog getBlogFromSession() {
 
         // TODO: Buscar site na sessão

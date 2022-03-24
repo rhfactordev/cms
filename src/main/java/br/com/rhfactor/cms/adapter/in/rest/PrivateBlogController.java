@@ -3,6 +3,7 @@ package br.com.rhfactor.cms.adapter.in.rest;
 import br.com.rhfactor.cms.adapter.in.responses.PostListItemResponse;
 import br.com.rhfactor.cms.application.port.in.PrivateBlogUsecase;
 import br.com.rhfactor.cms.application.port.in.commands.CreatePostCommand;
+import br.com.rhfactor.cms.application.port.in.commands.IdNameCommand;
 import br.com.rhfactor.cms.domain.Page;
 import br.com.rhfactor.cms.domain.Post;
 import br.com.rhfactor.cms.infrastructure.error.exception.NotFoundException;
@@ -14,17 +15,16 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static br.com.rhfactor.cms.adapter.out.persistence.converters.PersistenceConverters.toPage;
 import static br.com.rhfactor.cms.adapter.out.persistence.converters.PersistenceConverters.toPeageableRequest;
 
 @Slf4j
 @RestController
-@RequestMapping("/cms/private/blog")
 @RequiredArgsConstructor
+@RequestMapping("/cms/private/blog")
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class PrivateBlogController {
 
     private final PrivateBlogUsecase blogUsecase;
@@ -72,6 +72,15 @@ public class PrivateBlogController {
                 .categoryName( post.getCategory().getName() )
                 .title( post.getTitle() )
                 .build();
+    }
+
+    @GetMapping("categories")
+    public List<IdNameCommand> listaCategories(){
+        return blogUsecase.listAllCategories()
+                .stream()
+                .map( it-> IdNameCommand.builder().id( it.getId() ).name( it.getName() ).build() )
+                .collect(Collectors.toList());
+
     }
 
 
