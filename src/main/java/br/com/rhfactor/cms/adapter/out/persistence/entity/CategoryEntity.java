@@ -55,4 +55,13 @@ public class CategoryEntity {
                 .slug(categoryEntity.getSlug())
                 .build();
     }
+
+    public static CategoryEntity fromDomain(Category category) {
+        return CategoryEntity.builder()
+                .id(category.getId())
+                .blog( category.getBlog() == null ? null : BlogEntity.fromDomain( category.getBlog() ) )
+                .name(category.getName())
+                .slug(category.getSlug())
+                .build();
+    }
 }

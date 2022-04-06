@@ -1,5 +1,6 @@
 package br.com.rhfactor.cms.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 

@@ -26,4 +26,10 @@ public class PageableRequest {
                 .build();
     }
 
+    public static PageableRequest of(int pageNumber, int pageSize) {
+        return PageableRequest.builder()
+                .pageSize( pageSize )
+                .pageNumber( pageNumber )
+                .build();
+    }
 }

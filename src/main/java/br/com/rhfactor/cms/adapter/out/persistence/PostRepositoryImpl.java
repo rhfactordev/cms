@@ -1,15 +1,17 @@
 package br.com.rhfactor.cms.adapter.out.persistence;
 
-import br.com.rhfactor.cms.adapter.out.persistence.converters.PersistenceConverters;
+import br.com.rhfactor.cms.adapter.out.persistence.entity.BlogEntity;
 import br.com.rhfactor.cms.adapter.out.persistence.entity.PostEntity;
 import br.com.rhfactor.cms.adapter.out.persistence.repository.PostEntityRepository;
 import br.com.rhfactor.cms.adapter.out.persistence.specialization.PostSpecialization;
 import br.com.rhfactor.cms.application.port.out.PostRepository;
-import br.com.rhfactor.cms.domain.*;
+import br.com.rhfactor.cms.domain.Blog;
+import br.com.rhfactor.cms.domain.Page;
+import br.com.rhfactor.cms.domain.PageableRequest;
+import br.com.rhfactor.cms.domain.Post;
+import br.com.rhfactor.cms.infrastructure.error.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +19,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static br.com.rhfactor.cms.adapter.out.persistence.converters.PersistenceConverters.convert;
+import static br.com.rhfactor.cms.adapter.out.persistence.converters.PersistenceConverters.toPeageable;
 
 
 @Slf4j
@@ -43,13 +45,35 @@ public class PostRepositoryImpl implements PostRepository {
     }
 
     @Override
+    public Optional<Post> findPostByBlogAndId(Blog blog, Long id) {
+        PostEntity post = repository.findByBlogAndId(BlogEntity.fromDomain(blog), id)
+                .orElseThrow(() -> new NotFoundException("Blog not found"));
+        return  Optional.of( PostEntity.toDomain( post ) );
+    }
+
+    @Override
+    public Post save(Post post) {
+
+        PostEntity postEntity = PostEntity.fromDomain(post);
+        repository.save( postEntity );
+        post.setId( postEntity.getId() );
+
+        return post;
+    }
+
+    @Override
+    public Page<Post> findPosts(Blog blog, PageableRequest pageableRequest) {
+        return findPosts(blog, Optional.empty(), Optional.empty(), pageableRequest);
+    }
+
+    @Override
     public Page<Post> findPosts(Blog blog, Optional<String> category, Optional<String> tag, PageableRequest pageableRequest) {
 
         Specification<PostEntity> spec =
                 Specification.where( PostSpecialization.blog( blog.getId() ) )
                         .and( PostSpecialization.categorySource( category ) );
 
-        org.springframework.data.domain.Page<PostEntity> databasePage = repository.findAll(spec, convert(pageableRequest));
+        org.springframework.data.domain.Page<PostEntity> databasePage = repository.findAll(spec, toPeageable(pageableRequest));
         List<Post> domainList = databasePage.getContent().stream().map(PostEntity::toDomain).collect(Collectors.toList());
 
         return new Page<Post>(domainList,pageableRequest,databasePage.getTotalElements());
