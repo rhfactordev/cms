@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.SortDefault;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotEmpty;
@@ -53,7 +55,9 @@ public class PublicBlogController {
     public org.springframework.data.domain.Page<PageResponse> listPages(
             @RequestParam("category") Optional<String> category
             , @RequestParam("tag") Optional<String> tag
-            , Pageable pageable
+            , @SortDefault.SortDefaults({
+                @SortDefault(sort = "creationDate", direction = Sort.Direction.DESC),
+            }) Pageable pageable
     ){
         Page<Post> posts = blogUsecase.listPosts( getBlog( "sarakoimbra.com.br" )
                 , category
