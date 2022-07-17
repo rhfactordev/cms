@@ -56,7 +56,7 @@ public class PublicBlogController {
             @RequestParam("category") Optional<String> category
             , @RequestParam("tag") Optional<String> tag
             , @SortDefault.SortDefaults({
-                @SortDefault(sort = "creationDate", direction = Sort.Direction.ASC),
+                @SortDefault(sort = "creationDate", direction = Sort.Direction.DESC),
             }) Pageable pageable
     ){
         Page<Post> posts = blogUsecase.listPosts( getBlog( "sarakoimbra.com.br" )
